@@ -193,7 +193,6 @@ def atualizar_planilha(agendamento, file_path="arquivo_excel.xlsx"):
 
     # Salvar a planilha após atualizar
     wb.save(file_path)
-    st.write("Planilha atualizada com sucesso!")
 
     # Função para acessar a última resposta do chatbot
 def ultima_resposta(conversa):
