@@ -6,8 +6,6 @@ st.set_page_config(
     page_title="Realce Beauty"
 )
 
-st.sidebar.title("Página Inicial")
-
 main_bg2 = "realce3.png"
 
 def set_bg_hack(main_bg):
