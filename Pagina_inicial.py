@@ -2,6 +2,9 @@
 import streamlit as st
 import base64
 
+st.set_page_config(
+    page_title="Realce Beauty"
+)
 
 main_bg2 = "realce3.png"
 
