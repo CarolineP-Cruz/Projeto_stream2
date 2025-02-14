@@ -6,3 +6,4 @@ pydeck==0.9.1
 requests==2.32.3
 IPython==8.32.0
 tabulate
+openai
