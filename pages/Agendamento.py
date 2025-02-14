@@ -213,6 +213,47 @@ def verificar_e_atualizar(conversa, file_path=arquivo_excel):
         if agendamento:
             atualizar_planilha(agendamento, file_path)
 
+import git  # Biblioteca GitPython
+
+# Função para realizar commit e push para o GitHub
+def commit_e_push(repo_path, file_path, commit_message="Atualização da planilha"):
+    try:
+        # Acesse o repositório local
+        repo = git.Repo(repo_path)
+
+        # Adiciona o arquivo ao staging
+        repo.git.add(file_path)
+
+        # Commit as mudanças
+        repo.index.commit(commit_message)
+
+        # Push para o repositório remoto (GitHub)
+        origin = repo.remote(name='origin')
+        origin.push()
+        
+        print(f"Alterações no arquivo {file_path} foram enviadas para o GitHub com sucesso!")
+    except Exception as e:
+        print(f"Ocorreu um erro ao fazer o commit e push: {e}")
+
+# Função para verificar a resposta do chatbot e atualizar a planilha, além de fazer o commit
+def verificar_e_atualizar_e_commit(conversa, file_path=arquivo_excel, repo_path="https://github.com/CarolineP-Cruz/Projeto_stream2.git"):
+    # Acessar a última resposta do chatbot
+    resposta_do_chatbot = ultima_resposta(conversa)
+
+    if resposta_do_chatbot and "Informações do agendamento" in resposta_do_chatbot: 
+        # Extrair os dados do agendamento
+        agendamento = extrair_dados(resposta_do_chatbot)
+
+        if agendamento:
+            # Atualiza a planilha
+            atualizar_planilha(agendamento, file_path)
+            
+            # Após atualizar a planilha, commit e push para o GitHub
+            commit_e_push(repo_path, file_path)
+
+# No seu fluxo principal, após a verificação e atualização da planilha
+
+
 
 #############################################################3
 
@@ -255,5 +296,4 @@ if prompt:
     st.session_state.conversa.append({'role': 'system', 'content': response})
     
     # Verifica e atualiza a planilha se necessário
-    verificar_e_atualizar(st.session_state.conversa, file_path=arquivo_excel)
-
+verificar_e_atualizar_e_commit(st.session_state.conversa, file_path=arquivo_excel, repo_path="https://github.com/CarolineP-Cruz/Projeto_stream2.git")
