@@ -36,7 +36,11 @@ df =  pd.read_excel(arquivo_excel2)
 informação = df.to_markdown(index=False)
 
 from openai import OpenAI
-client = OpenAI(api_key= st.secrets["OPENAI_API_KEY"])
+
+api_key = st.secrets["OPENAI_API_KEY"]
+
+# Inicialize o cliente OpenAI com a chave de API
+client = OpenAI(api_key=api_key)
 
 sistema = f"""
 ---
