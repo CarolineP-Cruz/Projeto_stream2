@@ -1,0 +1,8 @@
+
+.streamlit/secrets.toml
+
+# Outros arquivos temporários ou desnecessários
+__pycache__/
+*.pyc
+*.log
+*.bak
